@@ -1,4 +1,4 @@
-package ru.dest.sdaqwdad;
+package ru.dest.samsungapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
