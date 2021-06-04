@@ -30,8 +30,6 @@ public class JsonGetTask extends AsyncTask <String, String, String> {
         return res;
     }
 
-    @Override
-    protected void onPostExecute(String s) {
-        MainActivity.getResult(s);
-    }
+
+
 }

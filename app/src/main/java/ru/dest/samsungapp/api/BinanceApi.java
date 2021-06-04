@@ -1,78 +1,55 @@
 package ru.dest.samsungapp.api;
 
-import android.os.AsyncTask;
-import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
-import ru.dest.samsungapp.MainActivity;
 
 public class BinanceApi{
-    private Api api;
-    private HashMap<String, String> data;
-    private Gson gson;
 
-    public BinanceApi(){
-        api  = new Api("https://api.binance.com/api/v3/ticker/price");
-        data = new HashMap<String, String>();
-        gson = new Gson();
+    private String host;
+    private HashMap<String,String> data;
 
-        loadData();
+
+    public BinanceApi(String host) {
+        this.host = host;
+        this.data = new HashMap<String,String>();
+
+        reloadData();
     }
 
-//    @Override
-//    protected Object doInBackground(Object[] objects) {
-//        String json = null;
-//        try {
-//            json = api.get("symbol", "BTCUSDT");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Type type = new TypeToken<Map<String, String>>(){}.getType();
-//        Map<String, String> map = gson.fromJson(json, type);
-//        data.put("BTC", map.get("price"));
-//
-//        try {
-//            json = api.get("symbol", "ETHUSDT");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        map = gson.fromJson(json, type);
-//
-//        data.put("ETH", map.get("price"));
-//        return null;
-//    }
+    public void reloadData(){
+        if(!data.isEmpty()) data.clear();
 
-    public void loadData(){
-        data.clear();
+        Gson gson = new Gson();
+        Type type = new TypeToken<Map<String,String>>(){}.getType();
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                Api api = new Api("https://api.binance.com/api/v3/ticker/price");
-                Gson gson = new Gson();
-                try {
-                    String res = api.get("symbol", "BTCUSDT");
+        try {
+            String btcAnswer = this.sendRequest("symbol", "BTCUSDT");
+            Map<String,String> map = gson.fromJson(btcAnswer, type);
 
-                    Type type = new TypeToken<Map<String, String>>(){}.getType();
-                    Map<String, String> map = gson.fromJson(res, type);
+            data.put("bitcoin", (String)map.get("price"));
 
-                    String answer = (String)map.get("price");
+            String ethAnswer = this.sendRequest("symbol", "ETHUSDT");
+            map = gson.fromJson(ethAnswer, type);
 
-                    data.put("BTC", answer.equals( "" )? "error" : answer);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+            data.put("etherium", (String)map.get("price"));
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
+
+    private String sendRequest(String key, String val) throws ExecutionException, InterruptedException {
+        return new JsonGetTask().execute(host, key,val).get();
+    }
+
 
     public HashMap<String, String> getData(){
         return data;
