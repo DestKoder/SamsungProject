@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String,String> binanceData  = new BinanceApi("https://api.binance.com/api/v3/ticker/price").getData();
 
         if(!binanceData.isEmpty()){
-            String text_btc = "BTC: " + binanceData.get("bitcoin");
+            String text_btc = "BTC: " + binanceData.get("bitcoin") + "$";
             price_btc.setText(text_btc);
-            String text_eth = "ETH: " + binanceData.get("etherium");
+            String text_eth = "ETH: " + binanceData.get("etherium"+ "$");
             price_eth.setText(text_eth);
         }
 
