@@ -1,26 +1,25 @@
-package ru.dest.samsungapp.api;
+package ru.dest.samsungapp.tasks;
 
 import android.os.AsyncTask;
 
 import java.io.IOException;
 
-public class JsonGetTask extends AsyncTask <String, String, String> {
+import ru.dest.samsungapp.utils.ApiRequest;
+
+public class JsonQueryTask extends AsyncTask<String,String,String> {
 
     @Override
     protected String doInBackground(String... params) {
         String res = "error";
 
-        Api api = new Api(params[0]);
+        ApiRequest api = new ApiRequest(params[0]);
 
         try {
-            res = api.get(params[1], params[2]);
+            res = api.get(params[1]);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return res;
     }
-
-
-
 }

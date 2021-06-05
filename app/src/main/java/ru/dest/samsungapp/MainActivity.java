@@ -7,10 +7,10 @@ import android.os.Handler;
 
 import java.util.Timer;
 
-import ru.dest.samsungapp.activity.ActivityOne;
+import ru.dest.samsungapp.activity.BinanceActivity;
 
 
-public class SplashScreen extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Handler handler=new Handler();
     private  boolean isLauncher=false;
@@ -31,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
     private void startLauncherActivity() {
         if(!isLauncher){
             isLauncher=true;
-            Intent intent=new Intent(SplashScreen.this, ActivityOne.class);
+            Intent intent=new Intent(MainActivity.this, BinanceActivity.class);
             startActivity(intent);
         }
         finish();

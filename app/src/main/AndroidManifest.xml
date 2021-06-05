@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
-        <activity android:name="ru.dest.samsungapp.SplashScreen">
+        <activity android:name="ru.dest.samsungapp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.dest.samsungapp.activity.ActivityOne"/>
-        <activity android:name="ru.dest.samsungapp.activity.ActivityTwo"/>
+        <activity android:name="ru.dest.samsungapp.activity.BinanceActivity"/>
+        <activity android:name="ru.dest.samsungapp.activity.BitfinexActivity"/>
     </application>
 
 </manifest>

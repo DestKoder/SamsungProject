@@ -7,17 +7,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import ru.dest.samsungapp.tasks.JsonGetTask;
 
-public class BinanceApi{
 
-    private String host;
+public class BinanceApi implements API{
+
+    private final String API_HOST = "https://api.binance.com/api/v3/ticker/price";
+
+
     private HashMap<String,String> data;
 
 
-    public BinanceApi(String host) {
-        this.host = host;
+    public BinanceApi() {
         this.data = new HashMap<String,String>();
-
         reloadData();
     }
 
@@ -47,7 +49,7 @@ public class BinanceApi{
     }
 
     private String sendRequest(String key, String val) throws ExecutionException, InterruptedException {
-        return new JsonGetTask().execute(host, key,val).get();
+        return new JsonGetTask().execute(API_HOST, key,val).get();
     }
 
 
