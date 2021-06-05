@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         if(!binanceData.isEmpty()){
             String text_btc = "BTC: " + binanceData.get("bitcoin") + "$";
             price_btc.setText(text_btc);
-            String text_eth = "ETH: " + binanceData.get("etherium"+ "$");
+            String text_eth = "ETH: " + binanceData.get("ethereum") + "$";
             price_eth.setText(text_eth);
         }
 
@@ -34,5 +34,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, api);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
     }
 }

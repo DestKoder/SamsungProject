@@ -36,7 +36,7 @@ public class BinanceApi{
             String ethAnswer = this.sendRequest("symbol", "ETHUSDT");
             map = gson.fromJson(ethAnswer, type);
 
-            data.put("etherium", (String)map.get("price"));
+            data.put("ethereum", (String)map.get("price"));
 
         } catch (ExecutionException e) {
             e.printStackTrace();
