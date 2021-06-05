@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="api">
+        <item>Binance</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="api_2">
+        <item>Other</item>
+        <item>Binance</item>
+    </string-array>
+</resources>

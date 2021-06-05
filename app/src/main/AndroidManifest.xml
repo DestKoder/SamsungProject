@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.dest.samsungapp.MainActivity"/>
+        <activity android:name="ru.dest.samsungapp.activity.ActivityOne"/>
+        <activity android:name="ru.dest.samsungapp.activity.ActivityTwo"/>
     </application>
 
 </manifest>

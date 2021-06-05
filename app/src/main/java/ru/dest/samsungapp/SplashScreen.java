@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import java.util.Timer;
+
+import ru.dest.samsungapp.activity.ActivityOne;
 
 
 public class SplashScreen extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
     private void startLauncherActivity() {
         if(!isLauncher){
             isLauncher=true;
-            Intent intent=new Intent(SplashScreen.this, MainActivity.class);
+            Intent intent=new Intent(SplashScreen.this, ActivityOne.class);
             startActivity(intent);
         }
         finish();

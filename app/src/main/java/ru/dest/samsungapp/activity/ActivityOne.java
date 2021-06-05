@@ -1,21 +1,30 @@
-package ru.dest.samsungapp;
+package ru.dest.samsungapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Arrays;
 import java.util.HashMap;
+
+import ru.dest.samsungapp.R;
 import ru.dest.samsungapp.api.BinanceApi;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityOne extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static HashMap<String,String> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_one);
 
         TextView price_btc = (TextView)findViewById(R.id.bitcoin);
         TextView price_eth = (TextView)findViewById(R.id.ethereum);
@@ -30,10 +39,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Spinner spinner = findViewById(R.id.spinner_api);
-        String[] api = {"Binance", "Other"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, api);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.api, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+    }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        adapterView.getItemAtPosition(i);
+        switch (i) {
+            case 0:
+                return;
+            case 1:
+            case 2:
+                Intent intent = new Intent(this, ActivityTwo.class);
+                startActivity(intent);
+                return;
+        }
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 }

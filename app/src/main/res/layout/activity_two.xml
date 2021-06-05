@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.ActivityOne">
 
     <Spinner
-        android:id="@+id/spinner_api"
+        android:id="@+id/spinner_api_2"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="7dp"
