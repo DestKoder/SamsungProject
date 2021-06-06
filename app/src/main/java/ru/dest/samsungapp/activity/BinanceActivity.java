@@ -48,14 +48,13 @@ public class BinanceActivity extends AppCompatActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         adapterView.getItemAtPosition(i);
         switch (i) {
-            case 1:
+            case 0:
                 return;
-            case 2:
+            case 1:
                 Intent intent = new Intent(this, BitfinexActivity.class);
                 startActivity(intent);
                 return;
-            case 3:
-            case 4:
+            case 2:
                 Intent intent1 = new Intent(this, AverageActivity.class);
                 startActivity(intent1);
         }
