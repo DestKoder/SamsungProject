@@ -29,7 +29,7 @@ public class BitfinexActivity extends AppCompatActivity implements AdapterView.O
         TextView price_btc = (TextView)findViewById(R.id.bitcoin);
         TextView price_eth = (TextView)findViewById(R.id.ethereum);
 
-        api = new BinanceApi(this);
+        api = new BitfinexApi(this);
 
         String text_btc = api.getLastBitcoinPrice() + "$";
         String text_eth = api.getLastEthereumPrice() + "$";

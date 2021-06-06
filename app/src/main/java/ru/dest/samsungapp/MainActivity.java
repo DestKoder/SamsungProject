@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
                 startLauncherActivity();
             }
         },2500);
+
+        System.out.println(this.getDatabasePath("cryptoland"));
     }
 
     private void startLauncherActivity() {
@@ -45,6 +47,6 @@ public class MainActivity extends AppCompatActivity {
         if(timer!=null){
             timer.cancel();
         }
-
     }
+
 }

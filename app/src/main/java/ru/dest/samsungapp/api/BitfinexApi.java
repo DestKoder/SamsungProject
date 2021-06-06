@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import ru.dest.samsungapp.tasks.JsonQueryTask;
-import ru.dest.samsungapp.utils.SQLWorker;
+import ru.dest.samsungapp.sqlite.BinanceSQL;
 
 public class BitfinexApi implements API{
 
@@ -61,42 +61,42 @@ public class BitfinexApi implements API{
 
     @Override
     public void saveData(Context context, Double[] data) {
-        SQLWorker worker = new SQLWorker(context);
+        BinanceSQL worker = new BinanceSQL(context);
         SQLiteDatabase db = worker.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(SQLWorker.TABLE_DATA_TIME, new Date().getTime());
-        values.put(SQLWorker.TABLE_DATA_PRICE_BTC, data[0]);
-        values.put(SQLWorker.TABLE_DATA_PRICE_ETH, data[1]);
+        values.put(BinanceSQL.KEY_TIME, new Date().getTime());
+        values.put(BinanceSQL.KEY_PRICE_BTC, data[0]);
+        values.put(BinanceSQL.KEY_PRICE_ETH, data[1]);
 
-        Cursor cursor = db.query(SQLWorker.TABLE_DATA_BITFINEX, null,null,null,null,null,null);
+        Cursor cursor = db.query(BinanceSQL.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
 
-        db.insert(SQLWorker.TABLE_DATA_BITFINEX, null, values);
+        db.insert(BinanceSQL.TABLE_NAME_BITFINEX, null, values);
 
     }
 
     @Override
     public double getBitcoinPrice() {
-        SQLWorker worker = new SQLWorker(context);
+        BinanceSQL worker = new BinanceSQL(context);
         SQLiteDatabase db = worker.getWritableDatabase();
 
-        Cursor cursor = db.query(SQLWorker.TABLE_DATA_BITFINEX, null,null,null,null,null,null);
+        Cursor cursor = db.query(BinanceSQL.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
 
         cursor.moveToLast();
 
-        return cursor.getDouble(cursor.getColumnIndex(SQLWorker.TABLE_DATA_PRICE_BTC));
+        return cursor.getDouble(cursor.getColumnIndex(BinanceSQL.KEY_PRICE_BTC));
     }
 
     @Override
     public double getEthereumPrice() {
-        SQLWorker worker = new SQLWorker(context);
+        BinanceSQL worker = new BinanceSQL(context);
         SQLiteDatabase db = worker.getWritableDatabase();
 
-        Cursor cursor = db.query(SQLWorker.TABLE_DATA_BITFINEX, null,null,null,null,null,null);
+        Cursor cursor = db.query(BinanceSQL.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
 
         cursor.moveToLast();
 
-        return cursor.getDouble(cursor.getColumnIndex(SQLWorker.TABLE_DATA_PRICE_ETH));
+        return cursor.getDouble(cursor.getColumnIndex(BinanceSQL.KEY_PRICE_ETH));
     }
 
     @Override
