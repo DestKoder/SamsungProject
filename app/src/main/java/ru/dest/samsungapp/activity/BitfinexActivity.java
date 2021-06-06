@@ -12,11 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
-
 import ru.dest.samsungapp.R;
 import ru.dest.samsungapp.api.API;
-import ru.dest.samsungapp.api.BinanceApi;
 import ru.dest.samsungapp.api.BitfinexApi;
 
 public class BitfinexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -49,12 +46,12 @@ public class BitfinexActivity extends AppCompatActivity implements AdapterView.O
 
         mActivity = BitfinexActivity.this;
         ImageButton button = findViewById(R.id.image_button2);
-        button.setOnClickListener(v -> restartActivity(mActivity));
-    }
-    public static void restartActivity(Activity activity) {
-        activity.recreate();
+        button.setOnClickListener(v -> restartActivity(this));
     }
 
+    private static void restartActivity(Activity activity) {
+        activity.recreate();
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

@@ -15,41 +15,38 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import ru.dest.samsungapp.tasks.JsonQueryTask;
-import ru.dest.samsungapp.sqlite.BinanceSQL;
+import ru.dest.samsungapp.utils.SQLiteHelper;
 
 public class BitfinexApi implements API{
 
     private final String API_HOST = "https://api-pub.bitfinex.com/v2/ticker/t";
 
-    private HashMap<String,String> data;
     private Context context;
 
     public BitfinexApi(Context context) {
-        this.data = new HashMap<String,String>();
         this.context = context;
         reloadData();
     }
 
     public void reloadData(){
-        if(!data.isEmpty()) data.clear();
 
         Gson gson = new Gson();
         Type type = new TypeToken<Double[]>(){}.getType();
 
         try {
-            String btcAnswer = this.sendRequest("BTCUSD");
+            Double[] data =  new Double[2];
 
+            String btcAnswer = this.sendRequest("BTCUSD");
             Double[] answer = gson.fromJson(btcAnswer,type);
 
-            data.put("bitcoin", answer.length == 10 ? answer[6] + "" : "error");
+            data[0] = answer[6];
 
             String ethAnswer = this.sendRequest("ETHUSD");
-
             answer = gson.fromJson(ethAnswer, type);
 
-            data.put("ethereum", answer.length == 10 ? answer[6] + "" : "error");
+            data[1] = answer[6];
 
-            this.saveData(context, new Double[]{Double.parseDouble(data.get("bitcoin")),Double.parseDouble(data.get("ethereum"))});
+            this.saveData(context, data);
 
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -61,42 +58,42 @@ public class BitfinexApi implements API{
 
     @Override
     public void saveData(Context context, Double[] data) {
-        BinanceSQL worker = new BinanceSQL(context);
+        SQLiteHelper worker = new SQLiteHelper(context);
         SQLiteDatabase db = worker.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(BinanceSQL.KEY_TIME, new Date().getTime());
-        values.put(BinanceSQL.KEY_PRICE_BTC, data[0]);
-        values.put(BinanceSQL.KEY_PRICE_ETH, data[1]);
+        values.put(SQLiteHelper.KEY_TIME, new Date().getTime());
+        values.put(SQLiteHelper.KEY_PRICE_BTC, data[0]);
+        values.put(SQLiteHelper.KEY_PRICE_ETH, data[1]);
 
-        Cursor cursor = db.query(BinanceSQL.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
+        Cursor cursor = db.query(SQLiteHelper.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
 
-        db.insert(BinanceSQL.TABLE_NAME_BITFINEX, null, values);
+        db.insert(SQLiteHelper.TABLE_NAME_BITFINEX, null, values);
 
     }
 
     @Override
     public double getBitcoinPrice() {
-        BinanceSQL worker = new BinanceSQL(context);
+        SQLiteHelper worker = new SQLiteHelper(context);
         SQLiteDatabase db = worker.getWritableDatabase();
 
-        Cursor cursor = db.query(BinanceSQL.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
+        Cursor cursor = db.query(SQLiteHelper.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
 
         cursor.moveToLast();
 
-        return cursor.getDouble(cursor.getColumnIndex(BinanceSQL.KEY_PRICE_BTC));
+        return cursor.getDouble(cursor.getColumnIndex(SQLiteHelper.KEY_PRICE_BTC));
     }
 
     @Override
     public double getEthereumPrice() {
-        BinanceSQL worker = new BinanceSQL(context);
+        SQLiteHelper worker = new SQLiteHelper(context);
         SQLiteDatabase db = worker.getWritableDatabase();
 
-        Cursor cursor = db.query(BinanceSQL.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
+        Cursor cursor = db.query(SQLiteHelper.TABLE_NAME_BITFINEX, null,null,null,null,null,null);
 
         cursor.moveToLast();
 
-        return cursor.getDouble(cursor.getColumnIndex(BinanceSQL.KEY_PRICE_ETH));
+        return cursor.getDouble(cursor.getColumnIndex(SQLiteHelper.KEY_PRICE_ETH));
     }
 
     @Override

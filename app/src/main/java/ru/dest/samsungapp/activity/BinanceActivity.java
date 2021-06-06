@@ -43,10 +43,11 @@ public class BinanceActivity extends AppCompatActivity implements AdapterView.On
         spinner.setOnItemSelectedListener(this);
 
         mActivity = BinanceActivity.this;
+
         ImageButton button = findViewById(R.id.image_button1);
         button.setOnClickListener(v -> restartActivity(mActivity));
     }
-    public static void restartActivity(Activity activity) {
+    private static void restartActivity(Activity activity) {
         activity.recreate();
     }
 

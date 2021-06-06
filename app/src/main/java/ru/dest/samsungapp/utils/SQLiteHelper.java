@@ -1,10 +1,10 @@
-package ru.dest.samsungapp.sqlite;
+package ru.dest.samsungapp.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class BinanceSQL extends SQLiteOpenHelper {
+public class SQLiteHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 2;
 
@@ -17,7 +17,7 @@ public class BinanceSQL extends SQLiteOpenHelper {
     public static final String KEY_PRICE_BTC = "btc_price";
     public static final String KEY_PRICE_ETH = "eth_price";
 
-    public BinanceSQL(Context context) {
+    public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

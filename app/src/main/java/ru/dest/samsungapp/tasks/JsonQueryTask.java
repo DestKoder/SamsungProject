@@ -6,6 +6,10 @@ import java.io.IOException;
 
 import ru.dest.samsungapp.utils.ApiRequest;
 
+/*
+* Асинхронный запрос для работы с API посредставом запроса к странице.
+*/
+
 public class JsonQueryTask extends AsyncTask<String,String,String> {
 
     @Override

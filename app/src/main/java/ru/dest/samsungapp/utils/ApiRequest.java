@@ -16,6 +16,10 @@ public class ApiRequest {
         this.url = url;
     }
 
+    /*
+    * Метод отправки Get запроса к url.
+    */
+
     public String get(String key, String value) throws IOException {
         url += "?" + key + "=" + value;
         URL address = new URL(url);
@@ -33,6 +37,9 @@ public class ApiRequest {
         return response.toString();
     }
 
+    /*
+     * Метод обращения к странице сайта.
+     */
     public String get(String callPage) throws IOException {
         url+=callPage;
 

@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import java.io.IOException;
 
 import ru.dest.samsungapp.utils.ApiRequest;
-
+/*
+* Асинхронный запрос для работы с rest-api посредствам get запросов.
+*/
 public class JsonGetTask extends AsyncTask <String, String, String> {
 
     @Override
