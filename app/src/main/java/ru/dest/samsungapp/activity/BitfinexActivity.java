@@ -1,10 +1,12 @@
 package ru.dest.samsungapp.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import ru.dest.samsungapp.api.BitfinexApi;
 public class BitfinexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private API api;
+    private Activity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,15 @@ public class BitfinexActivity extends AppCompatActivity implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        mActivity = BitfinexActivity.this;
+        ImageButton button = findViewById(R.id.image_button2);
+        button.setOnClickListener(v -> restartActivity(mActivity));
     }
+    public static void restartActivity(Activity activity) {
+        activity.recreate();
+    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

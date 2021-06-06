@@ -1,11 +1,13 @@
 package ru.dest.samsungapp.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +22,8 @@ import ru.dest.samsungapp.api.BitfinexApi;
 
 public class AverageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private Activity mActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,13 @@ public class AverageActivity extends AppCompatActivity implements AdapterView.On
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        mActivity = AverageActivity.this;
+        ImageButton button = findViewById(R.id.image_button3);
+        button.setOnClickListener(v -> restartActivity(mActivity));
+    }
+    public static void restartActivity(Activity activity) {
+        activity.recreate();
     }
 
     @Override

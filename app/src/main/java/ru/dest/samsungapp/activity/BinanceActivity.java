@@ -2,33 +2,32 @@ package ru.dest.samsungapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.HashMap;
-
 import ru.dest.samsungapp.R;
 import ru.dest.samsungapp.api.API;
 import ru.dest.samsungapp.api.BinanceApi;
 
 public class BinanceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private API api;
+    private Activity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one);
 
-        TextView price_btc = (TextView)findViewById(R.id.bitcoin);
-        TextView price_eth = (TextView)findViewById(R.id.ethereum);
+        TextView price_btc = findViewById(R.id.bitcoin);
+        TextView price_eth = findViewById(R.id.ethereum);
 
-        api = new BinanceApi(this);
+        API api = new BinanceApi(this);
 
         String text_btc = api.getLastBitcoinPrice() + "$";
         String text_eth = api.getLastEthereumPrice() + "$";
@@ -42,6 +41,13 @@ public class BinanceActivity extends AppCompatActivity implements AdapterView.On
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        mActivity = BinanceActivity.this;
+        ImageButton button = findViewById(R.id.image_button1);
+        button.setOnClickListener(v -> restartActivity(mActivity));
+    }
+    public static void restartActivity(Activity activity) {
+        activity.recreate();
     }
 
     @Override
@@ -63,4 +69,5 @@ public class BinanceActivity extends AppCompatActivity implements AdapterView.On
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
 }
