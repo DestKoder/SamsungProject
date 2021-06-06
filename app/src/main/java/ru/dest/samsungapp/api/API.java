@@ -1,10 +1,17 @@
 package ru.dest.samsungapp.api;
 
-import java.util.HashMap;
+import android.content.Context;
+
 
 public interface API {
 
-    HashMap<String,String> getData();
-
     void reloadData();
+
+    void saveData(Context context, Double[] data);
+
+    double getBitcoinPrice();
+    double getEthereumPrice();
+
+    double getLastBitcoinPrice();
+    double getLastEthereumPrice();
 }

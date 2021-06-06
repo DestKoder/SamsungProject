@@ -13,12 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.HashMap;
 
 import ru.dest.samsungapp.R;
+import ru.dest.samsungapp.api.API;
 import ru.dest.samsungapp.api.BinanceApi;
 import ru.dest.samsungapp.api.BitfinexApi;
 
 public class BitfinexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static HashMap<String,String> data;
+    private API api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +29,13 @@ public class BitfinexActivity extends AppCompatActivity implements AdapterView.O
         TextView price_btc = (TextView)findViewById(R.id.bitcoin);
         TextView price_eth = (TextView)findViewById(R.id.ethereum);
 
-        HashMap<String,String> data  = new BitfinexApi().getData();
+        api = new BinanceApi(this);
 
-        if(!data.isEmpty()){
-            String text_btc = data.get("bitcoin") + "$";
-            price_btc.setText(text_btc);
-            String text_eth = data.get("ethereum") + "$";
-            price_eth.setText(text_eth);
-        }
+        String text_btc = api.getLastBitcoinPrice() + "$";
+        String text_eth = api.getLastEthereumPrice() + "$";
+
+        price_btc.setText(text_btc);
+        price_eth.setText(text_eth);
 
         Spinner spinner = findViewById(R.id.spinner_api_2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
