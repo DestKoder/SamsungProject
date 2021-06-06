@@ -2,10 +2,21 @@
 <resources>
     <string-array name="api">
         <item>Binance</item>
-        <item>Other</item>
+        <item>Bitfinex</item>
+        <item>Average</item>
     </string-array>
     <string-array name="api_2">
-        <item>Other</item>
+        <item>Bitfinex</item>
         <item>Binance</item>
+        <item>Average</item>
+    </string-array>
+    <string-array name="api_3">
+        <item>Average</item>
+        <item>Binance</item>
+        <item>Bitfinex</item>
+    </string-array>
+    <string-array name="cripto">
+        <item>Bitcoin</item>
+        <item>Ethereum</item>
     </string-array>
 </resources>

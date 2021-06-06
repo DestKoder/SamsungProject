@@ -30,9 +30,9 @@ public class BinanceActivity extends AppCompatActivity implements AdapterView.On
         HashMap<String,String> data  = new BinanceApi().getData();
 
         if(!data.isEmpty()){
-            String text_btc = "BTC: " + data.get("bitcoin") + "$";
+            String text_btc = data.get("bitcoin") + "$";
             price_btc.setText(text_btc);
-            String text_eth = "ETH: " + data.get("ethereum") + "$";
+            String text_eth = data.get("ethereum") + "$";
             price_eth.setText(text_eth);
         }
 
@@ -48,13 +48,16 @@ public class BinanceActivity extends AppCompatActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         adapterView.getItemAtPosition(i);
         switch (i) {
-            case 0:
-                return;
             case 1:
+                return;
             case 2:
                 Intent intent = new Intent(this, BitfinexActivity.class);
                 startActivity(intent);
                 return;
+            case 3:
+            case 4:
+                Intent intent1 = new Intent(this, AverageActivity.class);
+                startActivity(intent1);
         }
     }
     @Override

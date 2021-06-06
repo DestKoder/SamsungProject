@@ -17,8 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ru.dest.samsungapp.activity.BinanceActivity"/>
-        <activity android:name="ru.dest.samsungapp.activity.BitfinexActivity"/>
+        <activity android:name=".activity.BinanceActivity"/>
+        <activity android:name=".activity.BitfinexActivity"/>
+        <activity android:name=".activity.AverageActivity"/>
     </application>
 
 </manifest>

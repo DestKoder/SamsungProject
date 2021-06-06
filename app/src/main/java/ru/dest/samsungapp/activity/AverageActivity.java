@@ -1,5 +1,6 @@
 package ru.dest.samsungapp.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,36 +11,23 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.BreakIterator;
 import java.util.HashMap;
 
 import ru.dest.samsungapp.R;
 import ru.dest.samsungapp.api.BinanceApi;
 import ru.dest.samsungapp.api.BitfinexApi;
 
-public class BitfinexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    private static HashMap<String,String> data;
+public class AverageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_two);
+        setContentView(R.layout.activity_average);
 
-        TextView price_btc = (TextView)findViewById(R.id.bitcoin);
-        TextView price_eth = (TextView)findViewById(R.id.ethereum);
-
-        HashMap<String,String> data  = new BitfinexApi().getData();
-
-        if(!data.isEmpty()){
-            String text_btc = data.get("bitcoin") + "$";
-            price_btc.setText(text_btc);
-            String text_eth = data.get("ethereum") + "$";
-            price_eth.setText(text_eth);
-        }
-
-        Spinner spinner = findViewById(R.id.spinner_api_2);
+        Spinner spinner = findViewById(R.id.spinner_api_3);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.api_2, android.R.layout.simple_spinner_item);
+                R.array.api_3, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
@@ -54,13 +42,16 @@ public class BitfinexActivity extends AppCompatActivity implements AdapterView.O
             case 2:
                 Intent intent = new Intent(this, BinanceActivity.class);
                 startActivity(intent);
+                return;
             case 3:
             case 4:
-                Intent intent1 = new Intent(this, AverageActivity.class);
+                Intent intent1 = new Intent(this, BitfinexActivity.class);
                 startActivity(intent1);
         }
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 }
+
